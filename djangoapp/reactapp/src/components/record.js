@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Redirect} from 'react-router-dom';
 import {GlobalContext} from '../GlobalContext';
+import Microphone from './microphone';
 
 function Record() {
     let {state} = useContext(GlobalContext);
@@ -19,14 +20,16 @@ function Record() {
     if (counter > 0) {
         return (
             <div className='container'>
-                <h1>{counter}</h1>
+              Question shows here
+              <h1>{counter}</h1>
             </div>
         );
     }
     // TODO: Render the recorder component and the question
     return (
         <div className='container'>
-            Recording... 
+          Question shows here
+          <Microphone />
         </div>
     );
 }
