@@ -15,7 +15,7 @@ def analyze(data):
     for i in range(len(words)):
         if words[i] in filler:
             filler[words[i]] += 1
-    data["um"] = print(":".join("{};{}".format(k,v) for k,v in filler.items()))
+    data["um"] = ":".join("{};{}".format(k,v) for k,v in filler.items())
 
     blob = TextBlob(data["response"])
     phrases = blob.noun_phrases
