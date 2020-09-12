@@ -21,4 +21,6 @@ def analyze(data):
     phrases = blob.noun_phrases
     data["keyphrases"] = ",".join(phrases)
 
+    data["q"] = int(data["q"])
+
     return data

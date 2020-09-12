@@ -11,5 +11,3 @@
 
 
 ### Todo
-* placeholders in question-list (Amy will do)
-* modularize create response view function
