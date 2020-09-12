@@ -2,7 +2,7 @@ from django.db import models
 
 DEFAULT_QUESTION_ID = 1
 DEFAULT_NULL_VALUE = -1
-DEFAULT_TEXT = ""
+DEFAULT_TEXT = "N/A"
 
 class InterviewQuestion(models.Model):
     question = models.TextField()
@@ -22,7 +22,7 @@ class InterviewResponse(models.Model):
     response = models.TextField()
     time = models.IntegerField()
     wpm = models.IntegerField(default=DEFAULT_NULL_VALUE)
-    gradelevel = models.IntegerField(default=DEFAULT_NULL_VALUE)
+    um = models.IntegerField(default=DEFAULT_NULL_VALUE)
     keyphrases = models.TextField(default=DEFAULT_TEXT)
 
     q = models.ForeignKey(InterviewQuestion, on_delete=models.CASCADE, default=DEFAULT_QUESTION_ID)

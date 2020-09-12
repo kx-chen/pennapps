@@ -13,5 +13,4 @@
 ### Todo
 * placeholders in question-list
 * modularize create response view function
-* grade level function (Colemann Lieu)
-* textblob nounphrases function
+* um/like function (Colemann Lieu)

@@ -6,6 +6,7 @@ from rest_framework.response import Response
 
 from .serializers import InterviewResponseSerializer, InterviewQuestionSerializer
 from .models import InterviewResponse, InterviewQuestion
+from .helpers import analyze
 
 @api_view(["GET"])
 def apiOverview(request):
@@ -14,9 +15,9 @@ def apiOverview(request):
         "Response List": "/response-list/",
         "Question Detail": "/question-detail/<str:pk>",
         "Response Detail": "/response-detail/<str:pk>",
-        "Create": "/create-response/",
-        "Delete": "/delete-reponse/<str:pk>",
-        "Update": "/update-response/<str:pk>",
+        "Create": "/response-create/",
+        "Delete": "/response-delete/<str:pk>",
+        "Update": "/response-update/<str:pk>",
     }
 
     return Response(api_urls)
@@ -55,23 +56,13 @@ def interviewResponseCreate(request):
     # TODO
     # GOOGLE CLOUD API CALL SENDING request.data["response"] AUDIO AND THEN REPLACE THE AUDIO WITH STRING OUTPUT IN request.data["response"]
 
-    minutes = request.data["time"] / 60
-    wpm = len(request.data["response"].split()) // minutes
-    request.data["wpm"] = wpm
-
-    # TODO
-    request.data["gradelevel"] = 0
-
-    # TODO
-    request.data["keyphrases"] = "N/A"
+    request.data = analyze(request.data)
 
     serializer = InterviewResponseSerializer(data=request.data)
-    
     if serializer.is_valid():
         serializer.save()
     else:
         return Response(serializer.errors)
-
     # print(serializer.data)
         # {'id': 1, 'response': TEXT RESPONSE, 
         # 'time': INTEGER TIME, 
