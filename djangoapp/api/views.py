@@ -47,9 +47,38 @@ def interviewResponseDetail(request, pk):
 
 @api_view(["POST"])
 def interviewResponseCreate(request):
+    # print(request.data) 
+    # {'response': AUDIO FILE BINARY, 
+    # 'time': INTEGER TIME, 
+    # 'q': INTEGER QUESTION ID KEY}
+
+    # TODO
+    # GOOGLE CLOUD API CALL SENDING request.data["response"] AUDIO AND THEN REPLACE THE AUDIO WITH STRING OUTPUT IN request.data["response"]
+
+    minutes = request.data["time"] / 60
+    wpm = len(request.data["response"].split()) // minutes
+    request.data["wpm"] = wpm
+
+    # TODO
+    request.data["gradelevel"] = 0
+
+    # TODO
+    request.data["keyphrases"] = "N/A"
+
     serializer = InterviewResponseSerializer(data=request.data)
+    
     if serializer.is_valid():
         serializer.save()
+    else:
+        return Response(serializer.errors)
+
+    # print(serializer.data)
+        # {'id': 1, 'response': TEXT RESPONSE, 
+        # 'time': INTEGER TIME, 
+        # 'wpm': INTEGER WPM, 
+        # 'gradelevel': INTEGER GRADE LEVEL, 
+        # 'keyphrases': CONCATENATED STRING OF KEYPRHASES SEAPRATED BY COMMAS, 
+        # 'q': INTEGER QUESTION ID KEY}
     return Response(serializer.data)
 
 @api_view(["POST"])
@@ -58,6 +87,7 @@ def interviewResponseUpdate(request, pk):
     serializer = InterviewResponseSerializer(instance=response, data=request.data)
     if serializer.is_valid():
         serializer.save()
+    
     return Response(serializer.data)
 
 @api_view(["DELETE"])
