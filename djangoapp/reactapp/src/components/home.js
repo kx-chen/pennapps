@@ -22,11 +22,12 @@ function Home() {
                 onChange={(e, {value}) => setRole(value)}
             />
             <Link to='prep'>
-                <Button 
+                <Button
                     circular
                     size='massive'
                     icon='play'
                     className='start'
+                    disabled={!company || !role}
                 />
             </Link>
         </div>

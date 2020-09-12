@@ -12,8 +12,8 @@ function App() {
     <GlobalProvider>
       <div className="app">
         <Router>
-          <Route path='/prep' component={Record}/>
           <Route path='/' exact component={Home}/>
+          <Route path='/prep' component={Record}/>
         </Router>
       </div>
     </GlobalProvider>
