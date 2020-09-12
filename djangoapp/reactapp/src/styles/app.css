@@ -7,6 +7,7 @@
     --accent-color: #C6977F;
     --accent-color-light: #D9A78D;
     --title-size: 80px;
+    --header-size: 60px;
     --text-size: 16px;
 }
 
@@ -32,6 +33,12 @@ h1 {
     font-size: var(--title-size);
     font-style: italic;
 }
+
+h2 {
+    font-size: var(--header-size);
+    font-style: italic;
+}
+
 .app {
     position: relative;
     height: 100vh;
@@ -63,4 +70,8 @@ h1 {
 
 .ui.button.icon > i {
     color: white;
+}
+
+.question {
+    text-align: center;
 }
