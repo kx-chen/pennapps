@@ -22,7 +22,7 @@ class InterviewResponse(models.Model):
     response = models.TextField()
     time = models.IntegerField()
     wpm = models.IntegerField(default=DEFAULT_NULL_VALUE)
-    um = models.IntegerField(default=DEFAULT_NULL_VALUE)
+    um = models.TextField(default=DEFAULT_TEXT)
     keyphrases = models.TextField(default=DEFAULT_TEXT)
 
     q = models.ForeignKey(InterviewQuestion, on_delete=models.CASCADE, default=DEFAULT_QUESTION_ID)

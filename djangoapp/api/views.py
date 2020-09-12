@@ -56,7 +56,7 @@ def interviewResponseCreate(request):
     # TODO
     # GOOGLE CLOUD API CALL SENDING request.data["response"] AUDIO AND THEN REPLACE THE AUDIO WITH STRING OUTPUT IN request.data["response"]
 
-    request.data = analyze(request.data)
+    analyze(request.data)
 
     serializer = InterviewResponseSerializer(data=request.data)
     if serializer.is_valid():
