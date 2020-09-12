@@ -11,7 +11,6 @@ function Record() {
         counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
     }, [counter]);
 
-    // Cannot record without inputting a company and role
     if (!company || !role) {
         return <Redirect to='/'/>
     }

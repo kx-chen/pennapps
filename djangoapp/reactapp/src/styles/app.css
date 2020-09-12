@@ -49,3 +49,18 @@ h1 {
     justify-content: center;
     align-items: center;
 }
+
+.ui.button.icon {
+    background-color: var(--accent-color);
+    margin-top:1rem;
+    font-size: 2.25rem !important;
+}
+.ui.button.icon:hover,
+.ui.button.icon:focus,
+.ui.button.icon:active {
+    background-color: var(--accent-color-light);
+}
+
+.ui.button.icon > i {
+    color: white;
+}
