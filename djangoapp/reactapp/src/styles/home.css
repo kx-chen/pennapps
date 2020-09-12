@@ -1,0 +1,36 @@
+.ui.button.start {
+    font-size: 2.25rem !important;
+    background-color: var(--accent-color);
+    margin-top:1rem;
+}
+.ui.button.start:hover,
+.ui.button.start:focus,
+.ui.button.start:active {
+    background-color: var(--accent-color-light);
+}
+
+.ui.button.start > i {
+    color: white;
+}
+
+.ui.input {
+    color: white !important;
+    margin-bottom: 1.25rem;
+}
+
+.ui.input > input {
+    font-size: var(--text-size);
+    outline: none;
+    width:22.5rem;
+    border: none !important;
+    border-bottom: 1px solid white !important;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+    transition: border 1s ease-in-out;
+    color: white !important;
+}
+
+.ui.input > input:focus{
+    border: none;
+    border-bottom: 1px solid var(--accent-color) !important;
+}
