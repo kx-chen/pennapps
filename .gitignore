@@ -69,3 +69,6 @@ target/
 .python-version
 
 # adapted from https://github.com/skarol/gitignore/blob/master/Python.gitignore
+
+/Pipfile
+/Pipfile.lock
