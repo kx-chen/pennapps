@@ -11,6 +11,5 @@
 
 
 ### Todo
-* placeholders in question-list
+* placeholders in question-list (Amy will do)
 * modularize create response view function
-* um/like function (Colemann Lieu)

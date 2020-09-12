@@ -7,17 +7,15 @@ def analyze(data):
     wpm = len(words) // minutes
     data["wpm"] = wpm
 
-    # TODO
-    FILLER_WORDS = {
+    filler = {
         "um": 0, 
         "like": 0, 
         "yeah": 0
     }
-    # for i in range(len(words)):
-    #     if True:
-    #         continue
-
-    data["um"] = 0
+    for i in range(len(words)):
+        if words[i] in filler:
+            filler[words[i]] += 1
+    data["um"] = print(":".join("{};{}".format(k,v) for k,v in filler.items()))
 
     blob = TextBlob(data["response"])
     phrases = blob.noun_phrases
