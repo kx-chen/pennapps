@@ -18,3 +18,6 @@ Quickstart:
 * `pip install -r requirements.txt`
 * `cd djangoapp/reactapp`
 * `npm install`
+* `npm run build`
+* `cd ../` (to `djangoapp`)
+* `python3 manage.py runserver`
