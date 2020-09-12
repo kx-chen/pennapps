@@ -7,7 +7,7 @@
     --accent-color: #C6977F;
     --accent-color-light: #D9A78D;
     --title-size: 80px;
-    --text-size: 18px;
+    --text-size: 16px;
 }
 
 * {
@@ -48,4 +48,19 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.ui.button.icon {
+    background-color: var(--accent-color);
+    margin-top:1rem;
+    font-size: 2.25rem !important;
+}
+.ui.button.icon:hover,
+.ui.button.icon:focus,
+.ui.button.icon:active {
+    background-color: var(--accent-color-light);
+}
+
+.ui.button.icon > i {
+    color: white;
 }
