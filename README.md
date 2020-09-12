@@ -11,3 +11,10 @@ Team:
 Stack:
 * React.js
 * Django
+
+Quickstart:
+* `git clone git@github.com:kx-chen/pennapps.git`
+* `cd pennapps`
+* `pip install -r requirements.txt`
+* `cd djangoapp/reactapp`
+* `npm install`
