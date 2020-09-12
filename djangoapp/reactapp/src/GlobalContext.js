@@ -5,25 +5,41 @@ const GlobalProvider = ({ children }) => {
     let [state, setState] = useState({
         company: '',
         role: '',
+        time: 0,
+        audio: null,
     });
 
-    const setCompany = (val) => {
+    const setCompany = (company) => {
         setState(prevState => ({
             ...prevState,
-            company: val,
+            company,
         }));
     }
 
-    const setRole = (val) => {
+    const setRole = (role) => {
         setState(prevState => ({
             ...prevState,
-            role: val,
+            role,
+        }));
+    }
+
+    const setAudio = (audio) => {
+        setState(prevState => ({
+            ...prevState,
+            audio,
+        }));
+    }
+
+    const setTime = (time) => {
+        setState(prevState => ({
+            ...prevState,
+            time,
         }));
     }
 
     return (
         <GlobalContext.Provider
-            value={{state, setCompany, setRole}}
+            value={{state, setCompany, setRole, setAudio, setTime}}
         >
             {children}
         </GlobalContext.Provider>

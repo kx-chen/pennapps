@@ -1,0 +1,22 @@
+.question {
+    text-align: center;
+    width: 90%;
+}
+
+.time {
+    color: var(--accent-color);
+    font-size: 15rem;
+}
+
+.ui.button.stop {
+    border-radius: 100px;
+    font-size: 1.5rem !important;
+    color: var(--accent-color);
+    background-color: var(--primary-color-light) !important;
+}
+.ui.button.stop:hover,
+.ui.button.stop:active,
+.ui.button.stop:focus {
+    color: var(--accent-color);
+    background-color: var(--primary-color-light2) !important;
+}

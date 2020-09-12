@@ -1,14 +1,18 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Redirect} from 'react-router-dom';
 import {GlobalContext} from '../GlobalContext';
+import {displayTime} from '../util';
 import Microphone from './microphone';
 
+import '../styles/record.css';
+
 function Record() {
-    let {state} = useContext(GlobalContext);
+    let {state, setTime} = useContext(GlobalContext);
     let {company, role} = state;
     let [counter, setCounter] = useState(5);
     let [question, setQuestion] = useState("");
     let [timeLeft, setTimeLeft] = useState(120);
+    let [stop, setStop] = useState(false);
 
     useEffect(() => {
         counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
@@ -40,22 +44,22 @@ function Record() {
     if (counter > 0) {
         return (
             <div className='container'>
-              Question shows here
-              <h1>{counter}</h1>
+                <h1>{counter}</h1>
             </div>
         );
     }
 
     // End recording after 2 minutes
-    if (timeLeft <= 0) {
+    if (timeLeft <= 0 || stop) {
+        setTime(120 - timeLeft);
         return <Redirect to='/result'/>
     }
 
-    // TODO: Render the recorder component and the question
     return (
         <div className='container'>
-          Question shows here
-          <Microphone />
+            <h2 className='question'>"{question}"</h2>
+            <h2 className='time'>{displayTime(timeLeft)}</h2>
+            <Microphone setStop={setStop}/>
         </div>
     );
 }

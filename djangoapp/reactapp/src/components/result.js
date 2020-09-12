@@ -1,12 +1,17 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {Redirect} from 'react-router-dom';
 import {GlobalContext} from '../GlobalContext';
+import {displayTime} from '../util';
 import {Button} from 'semantic-ui-react';
 
 function Result() {
     let {state, setCompany, setRole} = useContext(GlobalContext);
-    let {company, role} = state;
+    let {company, role, time, audio} = state;
     let [route, setRoute] = useState('');
+
+    useEffect(() => {
+        audio && audio.play();
+    });
 
     if (!company || !role) {
         return <Redirect to='/'/>
@@ -25,6 +30,7 @@ function Result() {
     return (
         <div className='container'>
             <div className='result--btns'>
+                {displayTime(time)}
                 <Button
                     circular
                     icon='stop'

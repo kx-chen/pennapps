@@ -9,17 +9,17 @@ import 'semantic-ui-css/semantic.min.css';
 import './styles/app.css';
 
 function App() {
-  return (
-    <GlobalProvider>
-      <div className="app">
-        <Router>
-          <Route path='/' exact component={Home}/>
-          <Route path='/prep' component={Record}/>
-          <Route path='/result' component={Result}/>
-        </Router>
-      </div>
-    </GlobalProvider>
-  );
+    return (
+        <GlobalProvider>
+            <div className="app">
+                <Router>
+                    <Route path='/' exact component={Home}/>
+                    <Route path='/prep' component={Record}/>
+                    <Route path='/result' component={Result}/>
+                </Router>
+            </div>
+        </GlobalProvider>
+    );
 }
 
 export default App;
