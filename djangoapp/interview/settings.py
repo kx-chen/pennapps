@@ -54,7 +54,11 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
+<<<<<<< HEAD:djangoapp/interview/settings.py
             os.path.join(BASE_DIR, 'reactapp/build'),
+=======
+            os.path.join(BASE_DIR, 'frontend/build'),
+>>>>>>> upstream/master:djangoapp/interview/settings.py
         ],
         'APP_DIRS': True,
         'OPTIONS': {
