@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import {Button, Input} from 'semantic-ui-react';
+import { Link } from "react-router-dom";
+import {GlobalContext} from '../GlobalContext';
 
 import '../styles/home.css';
 
 function Home() {
-    let [company, setCompany] = useState("");
-    let [role, setRole] = useState("");
-
+    let {state, setCompany, setRole} = useContext(GlobalContext);
+    let {company, role} = state;
     return (
         <div className='container'>
             <h1>InterviewMe</h1>
@@ -20,12 +21,14 @@ function Home() {
                 value={role}
                 onChange={(e, {value}) => setRole(value)}
             />
-            <Button 
-                circular
-                size='massive'
-                icon='play'
-                className='start'
-            />
+            <Link to='prep'>
+                <Button 
+                    circular
+                    size='massive'
+                    icon='play'
+                    className='start'
+                />
+            </Link>
         </div>
     )
 }
