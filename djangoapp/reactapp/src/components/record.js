@@ -7,7 +7,7 @@ import Microphone from './microphone';
 import '../styles/record.css';
 
 function Record() {
-    let {state, setTime} = useContext(GlobalContext);
+    let {state, setTime, setQuestionID} = useContext(GlobalContext);
     let {company, role} = state;
     let [counter, setCounter] = useState(5);
     let [question, setQuestion] = useState("");
@@ -19,8 +19,9 @@ function Record() {
     }, [counter]);
 
     useEffect(() => {
+        const id = Math.floor(Math.random() * 26) + 1;
+        setQuestionID(id);
         const fetchQuestion = async () => {
-            const id = Math.floor(Math.random() * 26) + 1;
             const res = await fetch(`/api/question-detail/${id}`);
             const data = await res.json();
             const q = data

@@ -7,6 +7,7 @@ const GlobalProvider = ({ children }) => {
         role: '',
         time: 0,
         audio: null,
+        questionID: null
     });
 
     const setCompany = (company) => {
@@ -37,9 +38,16 @@ const GlobalProvider = ({ children }) => {
         }));
     }
 
+    const setQuestionID = (questionID) => {
+        setState(prevState => ({
+            ...prevState,
+            questionID,
+        }));
+    }
+
     return (
         <GlobalContext.Provider
-            value={{state, setCompany, setRole, setAudio, setTime}}
+            value={{state, setCompany, setRole, setAudio, setTime, setQuestionID}}
         >
             {children}
         </GlobalContext.Provider>
