@@ -7,6 +7,9 @@ const BIT_RATE = 128;
 const DURATION_FACTOR = BIT_RATE/0.008
 const Mp3Recorder = new MicRecorder({ bitRate: 128 });
 
+const io = require('socket.io-client');
+const socket = io('http://localhost:1337');
+
 
 function Microphone(props) {
     let {state, setAudio} = useContext(GlobalContext);
@@ -21,6 +24,8 @@ function Microphone(props) {
     }
 
     const stop = () => {
+        console.log("stop")
+        socket.emit('startGoogleCloudStream');
         Mp3Recorder
             .stop()
             .getMp3()
@@ -38,21 +43,18 @@ function Microphone(props) {
                         console.log({"file": file,
                                      "q": questionID,
                                      "time": file.size/DURATION_FACTOR });
-                        const res = await fetch("/api/response-create/", {
-                            method: "post",
-                            headers: {
-                                'Content-Type': 'audio/mp3',
-                                'Content-Disposition': 'attachment; filename=file.mp3'
-                            },
-                            body: file
-                        });
-                        const data = await res.json();
-                        console.log(data);
+                        socket.emit('binaryData', file);
                     }
                     sendAudio(file, player);
                 }
             })
-            .then(() => setCurrentlyRecording(false))
+            .then(() => {
+                setTimeout(() => {
+                    socket.emit('endGoogleCloudStream');
+                }, 1000)
+
+                setCurrentlyRecording(false)
+            })
             .catch((e) => console.log(">>",e));
     };
 
