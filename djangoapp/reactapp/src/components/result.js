@@ -7,6 +7,7 @@ import {Button} from 'semantic-ui-react';
 function Result() {
     let {state, setCompany, setRole, setAudio} = useContext(GlobalContext);
     let {company, role, time, audio, transcript} = state;
+    console.log(state)
     let [route, setRoute] = useState('');
 
     useEffect(() => {

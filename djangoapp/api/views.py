@@ -48,11 +48,10 @@ def interviewResponseDetail(request, pk):
 
 @api_view(["POST"])
 def interviewResponseCreate(request):
-    # print(request.data)
-    # {'response': AUDIO FILE BINARY, 
+    # {'response': AUDIO FILE, 
     # 'time': INTEGER TIME, 
     # 'q': INTEGER QUESTION ID KEY}
-    print(request.data)
+    # print(request.data)
     analyze(request.data)
 
     serializer = InterviewResponseSerializer(data=request.data)
