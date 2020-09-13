@@ -34,7 +34,7 @@ function Microphone(props) {
                     setAudio(player);
 
                     const sendAudio = async (file, player) => {
-                        console.log(state, player);
+                        console.log(state, player, blob);
                         console.log({"file": file,
                                      "q": questionID,
                                      "time": file.size/DURATION_FACTOR });
@@ -42,9 +42,9 @@ function Microphone(props) {
                             method: "post",
                             headers: {
                                 'Accept': 'application/json',
-                                'Content-Type': 'application/json'
+                                'Content-Type': 'audio/mp3'
                             },
-                            body: {"file": file, "q": questionID, "time": player.duration}
+                            body: file
                         });
                         const data = await res.json();
                         console.log(data);
