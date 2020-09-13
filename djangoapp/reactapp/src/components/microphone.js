@@ -41,7 +41,8 @@ function Microphone(props) {
                         const res = await fetch("/api/response-create/", {
                             method: "post",
                             headers: {
-                                'Content-Type': 'audio/mp3'
+                                'Content-Type': 'audio/mp3',
+                                'Content-Disposition': 'attachment; filename=file.mp3'
                             },
                             body: file
                         });
