@@ -10,11 +10,17 @@ def analyze(data):
     filler = {
         "um": 0, 
         "like": 0, 
-        "yeah": 0
+        "yeah": 0,
+        "okay": 0,
+        "right": 0,
+        "uh": 0,
+        "er": 0,
+        "ah": 0,
     }
     for i in range(len(words)):
-        if words[i] in filler:
-            filler[words[i]] += 1
+        word = words[i].lower()
+        if word in filler:
+            filler[word] += 1
     data["um"] = ":".join("{};{}".format(k,v) for k,v in filler.items())
 
     blob = TextBlob(data["response"])
