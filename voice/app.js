@@ -2,25 +2,26 @@ const speech = require('@google-cloud/speech');
 const speechClient = new speech.v1p1beta1.SpeechClient();
 
 const port = process.env.PORT || 1337;
-const server = require('http').createServer(app);
+const server = require('http').createServer();
 
 const io = require('socket.io')(server);
+const fetch = require('node-fetch');
 
 
 io.on('connection', function (client) {
     console.log('Client Connected to server');
     client.on('binaryData', function (data) {
-        let daStream = startRecognitionStream(this, data);
+        let daStream = startRecognitionStream(this, data.time, data.q);
         if (daStream !== null) {
             console.log("stream is there", data);
-            daStream.write(data);
+            daStream.write(data.rawAudio);
         }
         setTimeout(() => {
             daStream.end();
         }, 1000)
     });
 
-    function startRecognitionStream(client) {
+    function startRecognitionStream(client, time, q) {
         return speechClient
             .streamingRecognize(request)
             .on('error', console.error)
@@ -29,17 +30,21 @@ io.on('connection', function (client) {
                 client.emit('speechData', data);
                 console.log(data);
                 if (data.results[0] && data.results[0].isFinal) {
-                    stopRecognitionStream();
-                    startRecognitionStream(client);
+                    // Hacky: need a way to stop the stream and restart it
+                    // stopRecognitionStream();
+                    // startRecognitionStream(client);
                 }
+                const createResponseData = {
+                    response: data.results[0].alternatives[0].transcript,
+                    time: time,
+                    q
+                }
+                console.log(fetch('http://localhost:8000/api/response-create/', {
+                    method: 'post',
+                    body: JSON.stringify(createResponseData),
+                    headers: {'Content-Type': 'application/json'}
+                }));
             });
-    }
-
-    function stopRecognitionStream() {
-        if (recognizeStream) {
-            recognizeStream.end();
-        }
-        recognizeStream = null;
     }
 });
 

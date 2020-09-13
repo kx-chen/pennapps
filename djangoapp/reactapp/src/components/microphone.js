@@ -43,7 +43,11 @@ function Microphone(props) {
                         console.log({"file": file,
                                      "q": questionID,
                                      "time": file.size/DURATION_FACTOR });
-                        socket.emit('binaryData', file);
+                        socket.emit('binaryData', {
+                            rawAudio: file,
+                            time: file.size/DURATION_FACTOR,
+                            q: questionID
+                        });
                     }
                     sendAudio(file, player);
                 }
