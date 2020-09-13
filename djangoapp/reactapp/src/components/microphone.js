@@ -38,7 +38,7 @@ function Microphone(props) {
                         console.log({"file": file,
                                      "q": questionID,
                                      "time": file.size/DURATION_FACTOR });
-                        const res = await fetch("/response-create/", {
+                        const res = await fetch("/api/response-create/", {
                             method: "post",
                             headers: {
                                 'Accept': 'application/json',
