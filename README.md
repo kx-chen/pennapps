@@ -1,6 +1,6 @@
-# PennApps 2020 Virtual Hackathon Submission
+# PennApps XXI Virtual Hackathon Submission
 
-Devpost Link: [link]()
+Devpost: [link](https://devpost.com/software/interviewme-6s7wrk)
 
 Team: 
 * Kai Chen
@@ -10,7 +10,7 @@ Team:
 
 Stack:
 * React.js
-* Django
+* Django REST API
 
 Quickstart:
 * `git clone git@github.com:kx-chen/pennapps.git`
@@ -19,5 +19,5 @@ Quickstart:
 * `cd djangoapp/reactapp`
 * `npm install`
 * `npm run build`
-* `cd ../` (to `djangoapp`)
+* `cd ../` (back to `djangoapp`)
 * `python3 manage.py runserver`
