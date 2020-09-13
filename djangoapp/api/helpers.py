@@ -51,6 +51,9 @@ def analyze(data):
         data["keyphrases"] = "No key phrases were detected."
 
     # QUESTION ID KEY
-    data["q"] = int(data["q"])
+    if data["q"]:
+        data["q"] = int(data["q"])
+    else:
+        data["q"] = -1
 
     return data
