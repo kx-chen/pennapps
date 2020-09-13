@@ -6,7 +6,7 @@ import {Button} from 'semantic-ui-react';
 
 function Result() {
     let {state, setCompany, setRole, setAudio} = useContext(GlobalContext);
-    let {company, role, time, audio} = state;
+    let {company, role, time, audio, transcript} = state;
     let [route, setRoute] = useState('');
 
     useEffect(() => {
@@ -31,6 +31,7 @@ function Result() {
     return (
         <div className='container'>
             <div className='result--btns'>
+                <p>Transcript: {transcript.transcript}</p>
                 {displayTime(time)}
                 <Button
                     circular

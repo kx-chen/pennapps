@@ -12,9 +12,16 @@ const socket = io('http://localhost:1337');
 
 
 function Microphone(props) {
-    let {state, setAudio} = useContext(GlobalContext);
+    let {state, setAudio, setTextTranscript} = useContext(GlobalContext);
     let {questionID} = state;
     let [currentlyRecording, setCurrentlyRecording] = useState(false);
+
+    socket.on('transcriptResults', (result) => {
+        console.log("result:", result);
+        setTextTranscript(result);
+        props.setProcessing(false);
+        props.setStop(true);
+    });
     
     const start = () => {
         Mp3Recorder
@@ -35,7 +42,7 @@ function Microphone(props) {
                     const file = new File(buffer, 'file.mp3', {type: blob.type});
                     const player = new Audio(URL.createObjectURL(file));
                     //play audio
-                    props.setStop(true);
+                    props.setProcessing(true);
                     setAudio(player);
 
                     const sendAudio = async (file, player) => {

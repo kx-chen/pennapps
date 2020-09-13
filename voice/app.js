@@ -27,7 +27,6 @@ io.on('connection', function (client) {
             .on('error', console.error)
             .on('data', (data) => {
                 process.stdout.write(data.results[0] && data.results[0].alternatives[0] ? `Transcription: ${data.results[0].alternatives[0].transcript}\n` : '\n\nReached transcription time limit, press Ctrl+C\n');
-                client.emit('speechData', data);
                 console.log(data);
                 if (data.results[0] && data.results[0].isFinal) {
                     // Hacky: need a way to stop the stream and restart it
@@ -39,11 +38,18 @@ io.on('connection', function (client) {
                     time: time,
                     q
                 }
-                console.log(fetch('http://localhost:8000/api/response-create/', {
+                fetch('http://localhost:8000/api/response-create/', {
                     method: 'post',
                     body: JSON.stringify(createResponseData),
                     headers: {'Content-Type': 'application/json'}
-                }));
+                })
+                    .then((res) => res.json())
+                    .then((json) => {
+                        client.emit('transcriptResults', {
+                            transcript: data.results[0].alternatives[0].transcript ? data.results[0].alternatives[0].transcript : null,
+                            json
+                        });
+                    });
             });
     }
 });

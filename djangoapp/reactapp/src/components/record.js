@@ -12,6 +12,7 @@ function Record() {
     let [counter, setCounter] = useState(5);
     let [question, setQuestion] = useState("");
     let [timeLeft, setTimeLeft] = useState(120);
+    let [processing, setProcessing]  = useState(false)
     let [stop, setStop] = useState(false);
 
     useEffect(() => {
@@ -26,8 +27,8 @@ function Record() {
             const data = await res.json();
             const q = data
                 .question
-                .replace('[COMPANY]', company)
-                .replace('[ROLE]', role);
+                .replace('{COMPANY}', company)
+                .replace('{ROLE}', role);
             setQuestion(q);
         }
         fetchQuestion();
@@ -52,17 +53,28 @@ function Record() {
 
     // End recording after 2 minutes
     if (timeLeft <= 0 || stop) {
+        console.log("redirecting!!@")
         setTime(120 - timeLeft);
         return <Redirect to='/result'/>
     }
 
-    return (
-        <div className='container'>
-            <h2 className='question'>"{question}"</h2>
-            <h2 className='time'>{displayTime(timeLeft)}</h2>
-            <Microphone setStop={setStop}/>
-        </div>
-    );
+
+    if (!processing) {
+        return (
+            <div className='container'>
+                <h2 className='question'>"{question}"</h2>
+                <h2 className='time'>{displayTime(timeLeft)}</h2>
+                <Microphone setStop={setStop} setProcessing={setProcessing}/>
+            </div>
+        );
+    } else {
+        return (
+            <div className='container'>
+                <h2 className='question'>Loading...</h2>
+            </div>
+        );
+    }
+
 }
 
 export default Record;
