@@ -5,13 +5,14 @@ import {displayTime} from '../util';
 import {Button} from 'semantic-ui-react';
 
 function Result() {
-    let {state, setCompany, setRole} = useContext(GlobalContext);
+    let {state, setCompany, setRole, setAudio} = useContext(GlobalContext);
     let {company, role, time, audio} = state;
     let [route, setRoute] = useState('');
 
     useEffect(() => {
         audio && audio.play();
-    });
+        return () => { setAudio(undefined); }
+    }, [audio]);
 
     if (!company || !role) {
         return <Redirect to='/'/>
